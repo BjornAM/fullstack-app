@@ -13,7 +13,6 @@ let isLoggedIn = false
 
 function updateLoginStatus() {
   btnLogin.disabled = isLoggedIn
-  btnLogout = !isLoggedIn
 }
 
 btnLogin.addEventListener('click', async () => {

@@ -36,11 +36,11 @@ app.use( express.static(publicPath) )
 app.use( '/api/books', booksRoute )
 
 app.post('/login', (req, res) => {
-	const { name, password } = req.body 
+	const { username, password } = req.body 
 
 	// Finns användaren i databasen?
-	if( authenticateUser(name, password) ) {
-		const userToken = createToken(name)
+	if( authenticateUser(username, password) ) {
+		const userToken = createToken(username)
 		res.status(200).send(userToken) // skapat jwt som vi skickar tillbaka till frontend
 
 	} else {
