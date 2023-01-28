@@ -1,8 +1,9 @@
 // Imports
-import express from 'express'
+import { channel } from 'diagnostics_channel';
+import express, { Router } from 'express'
 import * as url from 'url';
-import booksRoute from './routes/books.js'
 import { authenticateUser, createToken } from './auth.js'
+import { router as channelRouter} from './routes/channels.js';
 
 // Konfiguration
 const app = express()
@@ -15,6 +16,7 @@ const logger = (req, res, next) => {
 	console.log(`${req.method}  ${req.url}`, req.body)
 	next()
 }
+app.use("/api/channels", channelRouter)
 app.use( express.json() )
 app.use( logger )
 app.use( express.static(staticPath) )
@@ -41,4 +43,4 @@ app.get('/', (req, res) => {
 	res.sendFile(path)
 })
 
-export {app}
+export {app} 
