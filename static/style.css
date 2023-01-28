@@ -1,0 +1,34 @@
+h1{
+  color: brown;
+}
+
+body {
+  background-color: bisque;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0em;
+  border: 1px solid darkkhaki;
+  border-radius: 0.4em;
+  padding: 1em;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1em;
+}
+
+.flex-row * {
+  flex-grow: 1;
+}
+
+button {
+  padding: 0.5em 1em;
+}
+
+button:hover {
+  cursor: pointer;
+}
