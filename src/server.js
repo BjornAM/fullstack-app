@@ -53,11 +53,11 @@ app.post('/login', (req, res) => {
 
 
 
-// app.get('/', (req, res) => {
-// 	let path = staticPath + '/index.html'
-// 	// console.log('GET /  path=', path)
-// 	res.sendFile(path)
-// })
+app.get('/', (req, res) => {
+	let path = staticPath + '/index.html'
+	// console.log('GET /  path=', path)
+	res.sendFile(path)
+})
 
 
 /*
