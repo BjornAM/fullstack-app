@@ -16,7 +16,7 @@ function updateLoginStatus() {
   btnLogout = !isLoggedIn
 }
 
-btnlogin.addEventListener('click', async () => {
+btnLogin.addEventListener('click', async () => {
   // hämta username och password
   // skicka med POST request tilll servern
   // när servern svarar:
@@ -91,10 +91,10 @@ async function getBooks() {
   })
 
 }
-btnGetBooks.addEventListener('click', getBooks)
+// btnGetBooks.addEventListener('click', getBooks)
 
-btnPostBook.addEventListener('click', async () => {
-  console.log()
+// btnPostBook.addEventListener('click', async () => {
+//   console.log()
   // skicka med jwt om vi är inloggade.
   // 1. skicka ett POST /api/books request med data i request body
 	// 2. Vad skickar servern för svar?
@@ -120,23 +120,23 @@ btnPostBook.addEventListener('click', async () => {
   }
   // TODO: Lägg till try catch !!!! Eftersom fetch är en osäker operation = "optimistisk" kod
   
-  try {
-  const response = await fetch('/api/books', options) // skickar det hela
+  // try {
+  // const response = await fetch('/api/books', options) // skickar det hela
 
-  if (response.status === 200) {
-    // Allt gick bra
-    //Skicka ett nytt GET request
-    getBooks() 
+  // if (response.status === 200) {
+  //   // Allt gick bra
+  //   //Skicka ett nytt GET request
+  //   getBooks() 
 
 
-  } else {
-    // Något gick fel
-    handleError('Något gick fel vid POST request! status=', response.status) 
-  }
-} catch (e) {
-handleError(e)
-}
-})
+  // } else {
+  //   // Något gick fel
+  //   handleError('Något gick fel vid POST request! status=', response.status) 
+  // }
+// } catch (e) {
+// handleError(e)
+// }
+// })
 
 const handleError = (e, status) => {
   console.error(e)
