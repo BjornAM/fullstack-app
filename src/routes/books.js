@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
 	}
 })
 
-function userIsAuthorized(req) {
+// function userIsAuthorized(req) 
 
 
 

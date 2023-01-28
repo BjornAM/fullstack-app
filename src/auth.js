@@ -13,7 +13,6 @@ function authenticateUser(userName, password) {
 	return Boolean(found)
 }
 
-export { authenticateUser }
 
 function createToken(name) {
 	const user = { name: name }
@@ -24,3 +23,4 @@ function createToken(name) {
 }
 
 export {authenticateUser}
+export {createToken}

@@ -2,11 +2,7 @@
 import express from 'express'
 import * as url from 'url';
 import booksRoute from './routes/books.js'
-import * as dotenv from 'dotenv'
-import jwt from 'jsonwebtoken'
 import { authenticateUser, createToken } from './auth.js'
-
-dotenv.config()
 
 // Konfiguration
 const app = express()
