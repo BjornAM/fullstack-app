@@ -1,19 +1,31 @@
-
-h1{
-  color: brown;
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background-color: bisque;
+  background-color: whitesmoke;
+}
+
+header {
+  background: lightgray;
+  padding: 1em;
+  font-style: normal;
+  font-weight: bold;
+  text-align: center;
+}
+
+h1{
+  color: rgb(22, 22, 22);
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 1em 0em;
-  border: 1px solid darkkhaki;
-  border-radius: 0.4em;
-  padding: 1em;
+  border: 1px solid darkgrey;
+  border-radius: 1;
+  padding: 2em;
 }
 
 .flex-row {
