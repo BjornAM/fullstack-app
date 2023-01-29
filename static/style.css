@@ -33,6 +33,7 @@ h1{
 
 h2 {
   display: center;
+  margin: 1em;
 }
 
 .left-column, .right-column {
@@ -71,10 +72,9 @@ button:hover {
 }
 
 .deadlift, .squat, .benchpress, .progression {
-  /* flex-direction: column; lås funkar ej */
-  /* align-items: column; lås funkar ej */
   margin: 1em;
   border: 2px solid black;
-  padding: 1.5em 3em;
+  padding: 0.5em;
   border-radius: 10px;
+  /* flytta texten till mitten*/
 }
