@@ -1,16 +1,28 @@
+:root {
+  background: black;
+  ;
+}
 * {
   box-sizing: border-box;
 }
 
 body {
-  
+  display: flex;
+  flex-direction: column;
   background-color: whitesmoke;
+}
+
+main {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2rem;
+
 }
 
 header {
   background: lightgray;
   padding: 1em;
-  font-style: normal;
   font-weight: bold;
   text-align: center;
 }
@@ -19,34 +31,50 @@ h1{
   color: rgb(22, 22, 22);
 }
 
-main {
-  display: flex;
-  flex-direction: column;
+h2 {
+  display: center;
 }
+
+.left-column, .right-column {
+  padding: 1em;
+  margin: 1em;
+  flex-direction: column;
+  display: flex;
+  align-items: column, center;
+
+}
+
+.right-column {
+  display: flex;
+}
+
 .login-form {
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: 1em 0em;
-  /* border: 1px solid darkgrey; */
-  /* border-radius: 1; */
+  align-items: column;
+  margin: 1em 1em;
   padding: 2em;
+  /* login-formen har dålig responsivitet*/
 }
 
-.flex-row {
-  display: flex;
-  flex-direction: row;
-  margin-top: 1em;
+.login-form > * {
+  padding: 1em;
+  margin: 0.2em;
 }
 
-/* .flex-row * {
-  flex-grow: 1;
-} */
-
-button {
+#sign-in-btn {
   padding: 0.5em 1em;
+
 }
 
 button:hover {
   cursor: pointer;
+}
+
+.deadlift, .squat, .benchpress, .progression {
+  /* flex-direction: column; lås funkar ej */
+  /* align-items: column; lås funkar ej */
+  margin: 1em;
+  border: 2px solid black;
+  padding: 1.5em 3em;
+  border-radius: 10px;
 }
