@@ -62,13 +62,16 @@ h2 {
   margin: 0.2em;
 }
 
-#sign-in-btn {
-  padding: 0.5em 1em;
-
-}
-
 button:hover {
   cursor: pointer;
+}
+
+#sign-in-btn {
+  padding: 0.5em 1em;
+}
+
+#send-btn {
+  padding: 0.5em 1em;
 }
 
 .deadlift, .squat, .benchpress, .progression {
