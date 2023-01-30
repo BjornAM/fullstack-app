@@ -9,13 +9,21 @@ const btnSignUp = document.querySelector("#sign-up-btn");
 const inputMessage = document.querySelector(".input-message");
 const btnSendMessage = document.querySelector("#send-btn");
 
+const channelsContainer = document.querySelector(".channels")
 
 // Används med localStorage
 const JWT_KEY = "bookapi-jwt";
 let isLoggedIn = false;
+
 async function loadChannels () {
   const response = await fetch("/api/channels");
   const data = await response.json()
+  data.forEach(channel => {
+    let elemDiv = document.createElement('div');
+    elemDiv.innerText = channel.name
+    elemDiv.className = "channel"
+    channelsContainer.appendChild(elemDiv)
+  })
   console.log("channel: ", data)
 }
 loadChannels()
