@@ -31,7 +31,7 @@ btnAddChannel.addEventListener('click', () => {
   }
   nextChannel++
 
-  const element = createTodoElement(newChannel)
+  const element = createChannelElement(newChannel)
   channelList.appendChild(element)
 
   data.push(newChannel)
@@ -57,10 +57,12 @@ async function loadChannels () {
 loadChannels()
 
 function updateLoginStatus() {
-  btnLogin.disabled = isLoggedIn;
+  btnSignIn.disabled = isLoggedIn;
+  btnSignUp.disabled = isLoggedIn;
 }
 
-btnLogin.addEventListener("click", async () => {
+
+btnSignIn.addEventListener("click", async () => {
   // hämta username och password
   // skicka med POST request tilll servern
   // när servern svarar:

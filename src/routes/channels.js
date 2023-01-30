@@ -15,6 +15,12 @@ const channelData = [
     id: "3",
     name: "Benchpress",
     isLocked: false,
+  },
+  {
+    id: "4",
+    name: "progression",
+    islocked: true,
+    // visa lås i frontend css?
   }
 ];
 

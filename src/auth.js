@@ -6,9 +6,9 @@ const fakeDb = [
 
 // function userExist(userName) {}
 
-function authenticateUser(userName, password) {
+function authenticateUser(username, password) {
 	// Tips: Array.some
-	const found = fakeDb.find(user => user.name === userName && user.password === password)
+	const found = fakeDb.find(user => user.name === username && user.password === password)
 
 	return Boolean(found)
 }

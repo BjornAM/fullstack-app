@@ -98,3 +98,7 @@ button:hover {
   border-radius: 10px;
   /* flytta texten till mitten*/
 }
+
+.channel  {
+  /* Lägg till 🔓 framför låst channel */
+}
