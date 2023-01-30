@@ -66,6 +66,14 @@ button:hover {
   cursor: pointer;
 }
 
+#add-channel-btn {
+  padding: 0.5em 1em;
+  margin: 1em;
+  border: 2px solid black;
+  padding: 0.5em;
+  border-radius: 10px;
+}
+
 #sign-in-btn {
   padding: 0.5em 1em;
 }
@@ -83,6 +91,7 @@ button:hover {
 }
 
 .channel {
+  text-align: center;
   margin: 1em;
   border: 2px solid black;
   padding: 0.5em;
