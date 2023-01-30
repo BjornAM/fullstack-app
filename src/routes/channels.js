@@ -1,6 +1,7 @@
 import express from "express";
 export const router = express.Router();
-const channelData = [
+
+let channelData = [
   {
     id: "1",
     name: "Deadlift",
@@ -20,10 +21,15 @@ const channelData = [
     id: "4",
     name: "progression",
     islocked: true,
-    // visa lås i frontend css?
+    // visa lås i frontend med html/css
   }
 ];
 
 router.get("/", (req, res) => {
   res.status(200).send(channelData);
 });
+
+router.post("/", (req, res) => {
+
+});
+
