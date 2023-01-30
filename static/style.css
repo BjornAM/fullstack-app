@@ -70,6 +70,14 @@ button:hover {
   padding: 0.5em 1em;
 }
 
+#sign-out-btn {
+  padding: 0.5em 1em;
+}
+
+#sign-up-btn {
+  padding: 0.5em 1em;
+}
+
 #send-btn {
   padding: 0.5em 1em;
 }

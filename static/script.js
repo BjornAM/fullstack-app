@@ -1,10 +1,14 @@
-const btnGetBooks = document.querySelector("#btnGetBooks");
-const btnPostBook = document.querySelector("#btnPostBook");
-const booksList = document.querySelector("#booksList");
-const inputUsername = document.querySelector("#inputUsername");
-const inputPassword = document.querySelector("#inputPassword");
-const btnLogin = document.querySelector("#btnLogin");
-const btnLogout = document.querySelector("#btnLogout");
+
+const inputUsername = document.querySelector(".input-username");
+const inputPassword = document.querySelector(".input-password");
+
+const btnSignIn = document.querySelector("#sign-in-btn");
+const btnSignOut = document.querySelector("#sign-out-btn");
+const btnSignUp = document.querySelector("#sign-up-btn");
+
+const inputMessage = document.querySelector(".input-message");
+const btnSendMessage = document.querySelector("#send-btn");
+
 
 // Används med localStorage
 const JWT_KEY = "bookapi-jwt";
