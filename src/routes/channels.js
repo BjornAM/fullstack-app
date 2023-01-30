@@ -33,3 +33,17 @@ router.post("/", (req, res) => {
 
 });
 
+router.put("/", (req, res) => {
+
+});
+
+router.patch("/", (req, res) => {
+
+});
+
+router.delete("/", (req, res) => {
+
+});
+
+
+
