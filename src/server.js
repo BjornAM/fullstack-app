@@ -1,6 +1,5 @@
 // Imports
-import { channel } from 'diagnostics_channel';
-import express, { Router } from 'express'
+import express from 'express'
 import * as url from 'url';
 import { authenticateUser, createToken } from './auth.js'
 import { router as channelRouter} from './routes/channels.js';
@@ -8,7 +7,6 @@ import { router as channelRouter} from './routes/channels.js';
 // Konfiguration
 const app = express()
 const staticPath = url.fileURLToPath(new URL('../static', import.meta.url))
-const publicPath = url.fileURLToPath(new URL('../public', import.meta.url))
 
 
 // Middleware
@@ -16,13 +14,30 @@ const logger = (req, res, next) => {
 	console.log(`${req.method}  ${req.url}`, req.body)
 	next()
 }
-app.use("/api/channels", channelRouter)
 app.use( express.json() )
 app.use( logger )
+app.use("/api/channels", channelRouter)
 app.use( express.static(staticPath) )
-app.use( express.static(publicPath) )
 
-// Routes
+
+
+// post.post("/api/channels", (req, res) => {
+
+// });
+
+// app.put("/api/channels", (req, res) => {
+
+// });
+
+// app.patch("/api/channels", (req, res) => {
+
+// });
+
+// app.delete("/api/channels", (req, res) => {
+
+// });
+
+
 app.post('/login', (req, res) => {
 	const { username, password } = req.body 
 
