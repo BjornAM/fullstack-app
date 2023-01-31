@@ -89,6 +89,9 @@ async function loadChannels (channelsContainer) {
     let elemDiv = document.createElement('div');
     elemDiv.innerText = channel.name
     elemDiv.className = "channel"
+    if (channel.isLocked) {
+      elemDiv.className = "channel isLocked"
+    }
     channelsContainer.appendChild(elemDiv)
   })
   console.log("channel: ", data)

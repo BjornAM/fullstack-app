@@ -99,6 +99,7 @@ button:hover {
   /* flytta texten till mitten*/
 }
 
-.channel  {
-  /* Lägg till 🔓 framför låst channel */
+.channel.isLocked  {
+  background-color: red;
+  /* 🔓 framför  */
 }

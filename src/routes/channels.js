@@ -20,7 +20,7 @@ let channelData = [
   {
     id: "4",
     name: "🔓 Progression",
-    islocked: true,
+    isLocked: true,
     // visa lås i frontend med html/css istället?
   }
 ];
@@ -29,5 +29,19 @@ router.get("/", (req, res) => {
   res.status(200).send(channelData);
 });
 
+// app.post("/api/channels", (req, res) => {
 
+// });
+
+// app.put("/api/channels", (req, res) => {
+
+// });
+
+// app.patch("/api/channels", (req, res) => {
+
+// });
+
+// app.delete("/api/channels", (req, res) => {
+
+// });
  
