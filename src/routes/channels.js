@@ -1,5 +1,6 @@
 import express from "express";
 export const router = express.Router();
+import shortid from "shortid";
 
 let channelData = [
   {
@@ -29,9 +30,14 @@ router.get("/", (req, res) => {
   res.status(200).send(channelData);
 });
 
-// app.post("/api/channels", (req, res) => {
-
-// });
+router.post("/", (req, res) => {
+  console.log('req',req.body)
+  channelData.push({
+    ...req.body, 
+    id: shortid()
+  })
+  res.json({ok: true})
+});
 
 // app.put("/api/channels", (req, res) => {
 

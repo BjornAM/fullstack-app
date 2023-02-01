@@ -15,8 +15,6 @@ const btnSignUp = document.querySelector("#btn-sign-up");
 const inputMessage = document.querySelector(".input-message");
 const btnSendMessage = document.querySelector("#btn-send-message");
 
-let nextChannel = 1
-
 // Hämta data från backend för startsida och vid inloggad sida
 
 //Eventlistener btnSignIn
@@ -55,28 +53,66 @@ btnSignIn.addEventListener("click", async () => {
   }
   
   updateLoginStatus();
-  });
+});
 
-  //Eventlistener btnSignOut
+//Eventlistener btnSignOut
 //Eventlistener btnSignUp
 
-// Eventlistener btnAddChannel
-btnAddChannel.addEventListener('click', () => {
+
+btnAddChannel.addEventListener('click', async () => {
   const channelFromUser = inputChannel.value
   const newChannel = {
-    id: nextChannel,
-    isDone: false,
+    isLocked: false,
     description: channelFromUser
   }
-  nextChannel++
-
-  const element = createChannelElement(newChannel)
+  const element = await createChannelElement(newChannel)
   channelList.appendChild(element)
 
   data.push(newChannel)
+  saveToLocalStorage(data)
   //spara till backend
 
 })
+
+async function createChannelElement (newChannel) {
+  const response = await fetch("/api/channels", {
+    method:"POST", 
+    headers: {
+      "Content-Type": "application/json"},
+    body: JSON.stringify(newChannel)
+  })
+    return response.json()
+  }
+
+
+
+inputChannel.addEventListener('keyup', event => {
+  let userText = inputChannel.value
+  if (userText.length > 0) {
+    btnAddChannel.disabled = false
+  } else {
+    btnAddChannel.disabled = true
+  }
+})
+
+function getFromLocalStorage() {
+	let maybeJson = localStorage.getItem(key)
+	if( !maybeJson ) {
+		return
+	}
+	try {
+		let actualData = JSON.parse(maybeJson)
+		return actualData
+	} catch {
+		return
+	}
+}
+function saveToLocalStorage(items) {
+	// items är en lista med objekt
+	let json = JSON.stringify(items)
+	localStorage.setItem(key, json)
+}
+
 
 // Används med localStorage (samma för backend?)
 const JWT_KEY = "bookapi-jwt";
