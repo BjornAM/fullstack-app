@@ -63,7 +63,7 @@ btnAddChannel.addEventListener('click', async () => {
   const channelFromUser = inputChannel.value
   const newChannel = {
     isLocked: false,
-    description: channelFromUser
+    name: channelFromUser
   }
   const element = await createChannelElement(newChannel)
   channelList.appendChild(element)
