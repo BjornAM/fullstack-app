@@ -65,23 +65,26 @@ btnAddChannel.addEventListener('click', async () => {
     isLocked: false,
     name: channelFromUser
   }
-  const element = await createChannelElement(newChannel)
-  channelList.appendChild(element)
+  const element = await fetchChannel(newChannel)
+  channelsContainer.appendChild(element)
 
-  data.push(newChannel)
-  saveToLocalStorage(data)
-  //spara till backend
+  //data.push(newChannel)
+  //saveToLocalStorage(data)
+  //spara till backend 
 
 })
 
-async function createChannelElement (newChannel) {
+async function fetchChannel(newChannel) {
   const response = await fetch("/api/channels", {
     method:"POST", 
     headers: {
       "Content-Type": "application/json"},
     body: JSON.stringify(newChannel)
   })
-    return response.json()
+    let data = await response.json()
+    // Spara eventuellt datan till localStorage
+    let channelElement = createChannelElement(data)
+return channelElement
   }
 
 
@@ -94,6 +97,19 @@ inputChannel.addEventListener('keyup', event => {
     btnAddChannel.disabled = true
   }
 })
+
+// inputMessage.addEventListener()
+
+inputMessage.addEventListener('keyup', event => {
+  let userText = inputMessage.value
+  if (userText.length > 0) {
+    btnSendMessage.disabled = false
+  } else {
+    btnSendMessage.disabled = true
+  }
+})
+
+// btnSendMessage.addEventListener()
 
 function getFromLocalStorage() {
 	let maybeJson = localStorage.getItem(key)
@@ -118,16 +134,20 @@ function saveToLocalStorage(items) {
 const JWT_KEY = "bookapi-jwt";
 let isLoggedIn = false;
 
-async function loadChannels (channelsContainer) {
-  const response = await fetch("/api/channels");
-  const data = await response.json()
-  data.forEach(channel => {
-    let elemDiv = document.createElement('div');
+function createChannelElement(channel) {
+  let elemDiv = document.createElement('div');
     elemDiv.innerText = channel.name
     elemDiv.className = "channel"
     if (channel.isLocked) {
       elemDiv.className = "channel isLocked"
     }
+    return elemDiv
+}
+async function loadChannels (channelsContainer) {
+  const response = await fetch("/api/channels");
+  const data = await response.json()
+  data.forEach(channel => {
+    let elemDiv = createChannelElement(channel)
     channelsContainer.appendChild(elemDiv)
   })
   console.log("channel: ", data)
