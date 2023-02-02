@@ -1,8 +1,10 @@
 import express from "express";
 export const router = express.Router();
 import shortid from "shortid";
+import {db} from '../database.js'
 
-let channelData = [
+let messageData = [
+  // Hur lägger man till själva meddelandet i varje objekt?
   {
     id: "1",
     name: "Deadlift",
@@ -22,33 +24,33 @@ let channelData = [
     id: "4",
     name: "🔓 Progression",
     isLocked: true,
-    // visa lås i frontend med html/css istället?
   },
 ];
+// messages: array med message-objekt
+// channels
+// users: array med password,username
 
 router.get("/", (req, res) => {
-  res.status(200).send(channelData);
+  res.status(200).send(db.data.messages);
 });
 
 router.post("/", (req, res) => {
   console.log("req", req.body);
-  channelData.push({
+  messageData.push({
     ...req.body,
     id: shortid(),
   });
-  // TODO: spara till databasen med db.write
-  //res.json({ ok: true });
-  res.sendStatus(200)
+  res.json({ ok: true });
 });
 
-// app.put("/api/channels", (req, res) => {
+// app.put("/", (req, res) => {
 
 // });
 
-// app.patch("/api/channels", (req, res) => {
+// app.patch("/", (req, res) => {
 
 // });
 
-// app.delete("/api/channels", (req, res) => {
+// app.delete("/", (req, res) => {
 
 // });

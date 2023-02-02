@@ -1,11 +1,13 @@
 // Imports
 import express from 'express'
 import * as dotenv from 'dotenv'
-import {authenticateUser} from './routes/database.js'
+import {authenticateUser} from './auth.js'
 import jwt from 'jsonwebtoken' 
 
 import * as url from 'url';
 import { router as channelRouter} from './routes/channels.js';
+import { router as messageRouter} from './routes/messages.js';
+
 
 // Konfiguration
 const app = express()
@@ -23,8 +25,10 @@ app.use( (req, res, next) => {
 	console.log(`${req.method} ${req.url}`, req.body)
 	next()
 })
-app.use("/api/channels", channelRouter)
 app.use( express.static(staticPath) )
+app.use("/api/channels", channelRouter)
+app.use("/api/messages", messageRouter)
+
 
 // Routes
 // POST /login
