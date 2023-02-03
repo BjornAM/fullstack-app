@@ -1,18 +1,15 @@
+
 import jwt from "jsonwebtoken"
-// Hämta kod från JWT-exemplet
-const fakeDb = [
-	{ name: 'Lovisa', password: 'hej123' }
-]
+import { db } from "./database.js"
+import bcrypt from 'bcryptjs'
 
-// function userExist(userName) {}
+async function authenticateUser(username, password) {
+	const found = await db.data
+		.users
+		.some(user => user.username === username && bcrypt.compareSync(password, user.password))
 
-function authenticateUser(username, password) {
-	// Tips: Array.some
-	const found = fakeDb.find(user => user.name === username && user.password === password)
-
-	return Boolean(found)
+	return found
 }
-
 
 function createToken(name) {
 	const user = { name: name }
@@ -22,5 +19,18 @@ function createToken(name) {
 	return user
 }
 
-export {authenticateUser}
-export {createToken}
+export { authenticateUser }
+export { createToken }
+
+export const userIsAuthenticated = async (req, res, next) => {
+
+	let token = req.headers?.authorization?.replace('Bearer ', '')
+	let decoded = jwt.decode(token, process.env.SECRET)
+
+	if (!decoded) {
+		res.sendStatus(401)
+		return
+	}
+	req.user = decoded
+	next()
+}
