@@ -1,56 +1,48 @@
 import express from "express";
 export const router = express.Router();
 import shortid from "shortid";
-import {db} from '../database.js'
+import {db} from "../database.js";
+import {userIsAuthenticated} from "../auth.js";
+import {format} from "date-fns";
 
-let messageData = [
-  // Hur lägger man till själva meddelandet i varje objekt?
-  {
-    id: "1",
-    name: "Deadlift",
-    isLocked: false,
-  },
-  {
-    id: "2",
-    name: "Squat",
-    isLocked: false,
-  },
-  {
-    id: "3",
-    name: "Benchpress",
-    isLocked: false,
-  },
-  {
-    id: "4",
-    name: "🔓 Progression",
-    isLocked: true,
-  },
-];
-// messages: array med message-objekt
-// channels
-// users: array med password,username
 
-router.get("/", (req, res) => {
-  res.status(200).send(db.data.messages);
+router.get("/:channelId", userIsAuthenticated, async (req, res) => {
+  const { channelId } = req.params
+  const { user } = req
+  
+  const channel = await db.data.channels.find(x => x.id === channelId)
+  const access = !channel || !channel.isLocked || (channel.isLocked && channel.createdBy === user.name)
+  if (!access) {
+    res.json([])
+    return
+  }
+
+  let messages = await db.data
+    .messages
+    .filter(x => x.channelId === channelId)
+
+  res.json(messages)
 });
 
-router.post("/", (req, res) => {
-  console.log("req", req.body);
-  messageData.push({
-    ...req.body,
-    id: shortid(),
-  });
+router.post("/", userIsAuthenticated, async (req, res) => {
+  const { user } = req
+  const { text, channelId } = req.body
+  if (!text) {
+    res.json({ ok: false })
+    return
+  }
+  db.data
+    .messages
+    .push({
+      username: user?.name,
+      id: shortid(),
+      text,
+      channelId,
+      time: new Date().toISOString(),
+      formattedDate: format(new Date(), 'yyyy-MM-dd HH:mm:ss')
+    })
+
+  await db.write()
+
   res.json({ ok: true });
 });
-
-// app.put("/", (req, res) => {
-
-// });
-
-// app.patch("/", (req, res) => {
-
-// });
-
-// app.delete("/", (req, res) => {
-
-// });

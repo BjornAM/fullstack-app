@@ -2,7 +2,7 @@ import express from "express";
 export const router = express.Router();
 import shortid from "shortid";
 import {userIsAuthenticated} from "../auth.js";
-import {db} from "../database.js"
+import {db} from "../database.js";
 
 router.get("/", userIsAuthenticated, async (req, res) => {
   const {user} = req
