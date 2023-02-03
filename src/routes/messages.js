@@ -1,10 +1,13 @@
 import express from "express";
 export const router = express.Router();
 import shortid from "shortid";
-import {db} from "../database.js";
-import {userIsAuthenticated} from "../auth.js";
-import {format} from "date-fns";
+import { db } from '../database.js'
+import { format } from 'date-fns'
+import { userIsAuthenticated } from "../auth.js";
 
+// messages: array med message-objekt
+// channels
+// users: array med password,username
 
 router.get("/:channelId", userIsAuthenticated, async (req, res) => {
   const { channelId } = req.params
@@ -46,3 +49,15 @@ router.post("/", userIsAuthenticated, async (req, res) => {
 
   res.json({ ok: true });
 });
+
+// app.put("/", (req, res) => {
+
+// });
+
+// app.patch("/", (req, res) => {
+
+// });
+
+// app.delete("/", (req, res) => {
+
+// });

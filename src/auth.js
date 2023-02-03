@@ -1,4 +1,3 @@
-
 import jwt from "jsonwebtoken"
 import { db } from "./database.js"
 import bcrypt from 'bcryptjs'
@@ -10,6 +9,7 @@ async function authenticateUser(username, password) {
 
 	return found
 }
+
 
 function createToken(name) {
 	const user = { name: name }

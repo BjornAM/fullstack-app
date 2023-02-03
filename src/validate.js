@@ -1,4 +1,5 @@
 
+
 function isValidBookPart(maybeBook) {
 	// Validering: kontrollera att datan är i rätt format
 	// title måste vara en icke-tom sträng

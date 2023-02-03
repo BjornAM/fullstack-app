@@ -18,6 +18,8 @@ const db = new Low(adapter)
 
 await db.read()
 
+
+
 console.log("The database contains: ", db.data)
 
 //db.data = [] //arrayen som innehåller all data ex.kakor

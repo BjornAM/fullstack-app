@@ -1,7 +1,9 @@
+
 :root {
   background: black;
   ;
 }
+
 * {
   box-sizing: border-box;
 }
@@ -27,7 +29,7 @@ header {
   text-align: center;
 }
 
-h1{
+h1 {
   color: rgb(22, 22, 22);
 }
 
@@ -36,7 +38,8 @@ h2 {
   margin: 1em;
 }
 
-.left-column, .right-column {
+.left-column,
+.right-column {
   padding: 1em;
   margin: 1em;
   flex-direction: column;
@@ -57,7 +60,7 @@ h2 {
   /* login-formen har dålig responsivitet*/
 }
 
-.login-form > * {
+.login-form>* {
   padding: 1em;
   margin: 0.2em;
 }
@@ -99,9 +102,13 @@ button:hover {
   /* flytta texten till mitten*/
 }
 
-.channel.isLocked  {
+.channel.isLocked {
   background-color: red;
   /* 🔓 framför  */
+}
+
+.channel.selected {
+  border: 2px solid blue;
 }
 
 .message {
@@ -113,11 +120,40 @@ button:hover {
   /* flytta texten till mitten*/
 }
 
-.message.isLocked  {
+.message {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+}
+
+.message .metadata {
+  font-size: 7pt;
+  align-self: flex-start;
+}
+
+.message .text {
+  font-size: 15pt;
+}
+
+.message.isLocked {
   background-color: red;
   /* 🔓 framför  */
 }
 
-.input-message {
+.input-message {}
 
+textarea {
+  width: 100%;
+  border-radius: .2rem;
+  color: black;
+}
+
+.channel-lock-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#selected-channel-title.locked {
+  color: red
 }

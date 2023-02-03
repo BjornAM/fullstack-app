@@ -1,13 +1,13 @@
 // Imports
 import express from 'express'
 import * as dotenv from 'dotenv'
-import {authenticateUser} from './auth.js'
-import jwt from 'jsonwebtoken' 
+import { authenticateUser } from './auth.js'
+import jwt from 'jsonwebtoken'
 
 import * as url from 'url';
-import { router as channelRouter} from './routes/channels.js';
-import { router as messageRouter} from './routes/messages.js';
-
+import { router as channelRouter } from './routes/channels.js';
+import { router as messageRouter } from './routes/messages.js';
+import { router as userRoter } from './routes/user.js';
 
 // Konfiguration
 const app = express()
@@ -21,20 +21,23 @@ const staticPath = url.fileURLToPath(new URL('../static', import.meta.url))
 
 //Middleware
 app.use(express.json())
-app.use( (req, res, next) => {
+app.use((req, res, next) => {
 	console.log(`${req.method} ${req.url}`, req.body)
 	next()
 })
-app.use( express.static(staticPath) )
+
+app.use(express.static(staticPath))
 app.use("/api/channels", channelRouter)
 app.use("/api/messages", messageRouter)
+app.use("/api/users", userRoter)
 
 
 // Routes
 // POST /login
-app.post('/login', (req, res) => {
-	const {username, password} = req.body
-	if (authenticateUser(username, password)) {
+app.post('/login', async (req, res) => {
+	const { username, password } = req.body
+	let check = await authenticateUser(username, password)
+	if (check) {
 		const userToken = createToken(username)
 		res.status(200).send(userToken)
 	} else {
@@ -43,19 +46,20 @@ app.post('/login', (req, res) => {
 	}
 })
 
+
 function createToken(name) {
-		const user = { name: name }
-		console.log('server.js createToken: ', user, process.env.SECRET)
-		const token = jwt.sign(user, process.env.SECRET, { expiresIn: '1h' })
-		user.token = token
-		console.log('createToken', user)
-		return user
-	}
+	const user = { name: name }
+	console.log('server.js createToken: ', user, process.env.SECRET)
+	const token = jwt.sign(user, process.env.SECRET, { expiresIn: '1h' })
+	user.token = token
+	console.log('createToken', user)
+	return user
+}
 
 // GET /secret
 
 app.listen(PORT, () => {
-  console.log('Server is listening on port' + PORT)
+	console.log('Server is listening on port' + PORT)
 })
 
 
@@ -76,4 +80,9 @@ app.get('/', (req, res) => {
 	res.sendFile(path)
 })
 
-export {app} 
+app.get('/login', (req, res) => {
+	let path = staticPath + '/login.html'
+	// console.log('GET /  path=', path)
+	res.sendFile(path)
+})
+export { app } 

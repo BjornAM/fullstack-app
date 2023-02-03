@@ -1,5 +1,213 @@
 {
-  "messages": [],
-  "channels": [],
-  "users": []
+  "messages": [
+    {
+      "username": "Björn",
+      "text": "test",
+      "channelId": "1",
+      "time": "2023-02-02T20:47:24.797Z",
+      "formattedDate": "2023-02-02 21:47:24"
+    },
+    {
+      "username": "Björn",
+      "text": "new message",
+      "channelId": "1",
+      "time": "2023-02-02T20:51:56.590Z",
+      "formattedDate": "2023-02-02 21:51:56"
+    },
+    {
+      "username": "Björn",
+      "text": "new message agina",
+      "time": "2023-02-02T20:52:14.041Z",
+      "formattedDate": "2023-02-02 21:52:14"
+    },
+    {
+      "username": "nisse",
+      "id": "8iSsrnxrI",
+      "text": "from nisse",
+      "channelId": "3",
+      "time": "2023-02-02T21:14:27.533Z",
+      "formattedDate": "2023-02-02 22:14:27"
+    },
+    {
+      "username": "222",
+      "id": "Xdv4hxVrM",
+      "text": "texrt",
+      "channelId": "1",
+      "time": "2023-02-02T21:55:24.118Z",
+      "formattedDate": "2023-02-02 22:55:24"
+    },
+    {
+      "username": "222",
+      "id": "cQdK7lOWR",
+      "text": "asdfasdf",
+      "channelId": "4",
+      "time": "2023-02-02T22:11:08.861Z",
+      "formattedDate": "2023-02-02 23:11:08"
+    },
+    {
+      "username": "222",
+      "id": "FMV1HUSWr",
+      "text": "test",
+      "channelId": "6FFINZkBo",
+      "time": "2023-02-02T22:15:27.490Z",
+      "formattedDate": "2023-02-02 23:15:27"
+    },
+    {
+      "username": "222",
+      "id": "15ffcjMYE",
+      "text": "asdf",
+      "channelId": "6FFINZkBo",
+      "time": "2023-02-02T22:15:47.612Z",
+      "formattedDate": "2023-02-02 23:15:47"
+    },
+    {
+      "username": "111",
+      "id": "STTcSC25O",
+      "text": "new chat msg",
+      "channelId": "zLC0Jq-ts",
+      "time": "2023-02-02T22:25:34.081Z",
+      "formattedDate": "2023-02-02 23:25:34"
+    },
+    {
+      "username": "hej",
+      "id": "2Kf30p0xL",
+      "text": "lkjldfsd",
+      "channelId": "2",
+      "time": "2023-02-03T19:33:31.871Z",
+      "formattedDate": "2023-02-03 20:33:31"
+    },
+    {
+      "username": "hej",
+      "id": "cx__DhXJ4",
+      "text": "asdasd",
+      "channelId": "2",
+      "time": "2023-02-03T19:33:35.612Z",
+      "formattedDate": "2023-02-03 20:33:35"
+    },
+    {
+      "username": "hej",
+      "id": "orKADtO33",
+      "text": "asdasdasdasd",
+      "channelId": "1",
+      "time": "2023-02-03T19:36:44.398Z",
+      "formattedDate": "2023-02-03 20:36:44"
+    },
+    {
+      "username": "hej",
+      "id": "OpKU4NJho",
+      "text": "asdasdasd",
+      "channelId": "1",
+      "time": "2023-02-03T19:36:48.026Z",
+      "formattedDate": "2023-02-03 20:36:48"
+    },
+    {
+      "username": "222",
+      "id": "GGnLHqIYs",
+      "text": "sdfsdf",
+      "channelId": "1",
+      "time": "2023-02-03T19:38:34.363Z",
+      "formattedDate": "2023-02-03 20:38:34"
+    },
+    {
+      "username": "33",
+      "id": "hCMK8wFm4",
+      "text": "wqq",
+      "channelId": "1",
+      "time": "2023-02-03T20:41:24.479Z",
+      "formattedDate": "2023-02-03 21:41:24"
+    }
+  ],
+  "channels": [
+    {
+      "id": "1",
+      "name": "Deadlift",
+      "isLocked": false
+    },
+    {
+      "id": "2",
+      "name": "Squat",
+      "isLocked": false
+    },
+    {
+      "id": "3",
+      "name": "Benchpress",
+      "isLocked": false
+    },
+    {
+      "id": "4",
+      "name": "🔓 Progression",
+      "isLocked": true,
+      "createdBy": "asdfasdf"
+    },
+    {
+      "isLocked": true,
+      "name": "new locked channel",
+      "id": "6FFINZkBo",
+      "createdBy": "222"
+    },
+    {
+      "isLocked": true,
+      "name": "inloggad som 111 Låst",
+      "id": "zLC0Jq-ts",
+      "createdBy": "111"
+    },
+    {
+      "isLocked": false,
+      "name": "",
+      "id": "FNO4W0TBc",
+      "createdBy": "hej"
+    }
+  ],
+  "users": [
+    {
+      "username": "222",
+      "id": "Pj3Yrw63f",
+      "password": "$2a$08$cir8y9vYZ/./dEyuAiZRruvt4VNOxq/uEh4w6JxxBhN.0pVeSDoRu"
+    },
+    {
+      "username": "111",
+      "id": "R1orPTsJP",
+      "password": "$2a$10$mKYoDAAIQ7BjeLrnR8UJf./WehJtHWOElcr85PDZPnik5kWaD1Gim"
+    },
+    {
+      "username": "hej",
+      "id": "SAo4bAL9A",
+      "password": "$2a$10$B.MtsGUXLIbyM6W2ZeufN.FOt0XeQ08yluXAHXqjNu1lKwEnCcLyG"
+    },
+    {
+      "username": "hej",
+      "id": "t0ztZJAxB",
+      "password": "$2a$10$9zdem4YAwquSllHVDyDWjuthIWeSB1csJaBSDeScqfVnRfpMMDVNu"
+    },
+    {
+      "username": "222",
+      "id": "OFNZwn-48",
+      "password": "$2a$10$VJYB.KGUniTXAAiQEGS4n.xtmQyVknzdTlAApA3wO5rhaW2AoXlgK"
+    },
+    {
+      "username": "hello",
+      "id": "ffo2UgW6A",
+      "password": "$2a$10$tvsQAMa8Lk69B87Lw2NERu1/4v.98s8wS3k7PB8tNfRgOC.Iw8Qq2"
+    },
+    {
+      "username": "2",
+      "id": "c0aY6jFow",
+      "password": "$2a$10$BNLbDDnUmRGamBXdXxDX9uCPjtoLSK13w8BI4MEZz7RM1L.6rPx5y"
+    },
+    {
+      "username": "12",
+      "id": "VGdx9k16i",
+      "password": "$2a$10$57kvlL8kQleVF2s7P1AK4O1c6AsZ4gcxlbcSKeIfq6E3qtUGiTnoK"
+    },
+    {
+      "username": "1313",
+      "id": "QlcyN4v_G",
+      "password": "$2a$10$fmSRvHylk0x28Kg782BqZeJmCncdGoWpnAFKp30RWMpzG/D0Pf7LW"
+    },
+    {
+      "username": "33",
+      "id": "55UINGvXy",
+      "password": "$2a$10$rwKic4wiRHxp0rOFgH3S2.T3mItrAffquNhfCvSsC/SdajvpvyOZa"
+    }
+  ]
 }

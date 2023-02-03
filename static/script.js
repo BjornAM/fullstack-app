@@ -1,57 +1,48 @@
+const _fetch = (uri, options) => {
+  return fetch(uri, {
+    ...options,
+    headers: {
+      ...options?.headers,
+      authorization: `Bearer ${localStorage.getItem(JWT_KEY)}`
+    },
+
+  })
+}
+
 // Variables Channels
 const channelsContainer = document.querySelector(".channels");
 const inputChannel = document.querySelector(".input-channel");
+const isLockedCheckbox = document.querySelector('.channel-locked')
 const btnAddChannel = document.querySelector("#btn-add-channel");
 const channelList = document.querySelector(".channel-list");
-
-//Variables users & password
-const inputUsername = document.querySelector(".input-username");
-const inputPassword = document.querySelector(".input-password");
-const btnSignIn = document.querySelector("#btn-sign-in");
-const btnSignOut = document.querySelector("#btn-sign-out");
-const btnSignUp = document.querySelector("#btn-sign-up");
+const selectedChannelTitle = document.querySelector("#selected-channel-title")
 
 //Variables messages
 const messagesContainer = document.querySelector(".messages");
 const inputMessage = document.querySelector(".input-message");
 const btnSendMessage = document.querySelector("#btn-send-message");
 
-// LEFT COLUMN
-//Eventlistener btnSignIn
-btnSignIn.addEventListener("click", async () => {
-  const user = {
-    username: inputUsername.value,
-    password: inputPassword.value,
-  };
-  const options = {
-    method: "POST",
-    body: JSON.stringify(user),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+//buttons
+const btnSignOut = document.querySelector("#btn-sign-out");
 
-  // LOGIN OK?
-  const response = await fetch("/login", options);
-  if (response.status === 200) {
-    const userToken = await response.json(); // spara userToken.token
-    localStorage.setItem(JWT_KEY, userToken.token);
-    isLoggedIn = true;
-  } else {
-    console.log("login failed, status:" + response.status);
-  }
 
-  updateLoginStatus();
-});
+const JWT_KEY = "chatsite-jwt";
+let isLoggedIn = false;
+let selectedChannel = undefined
+
 
 //Eventlistener btnSignOut
+btnSignOut.addEventListener('click', () => {
+  localStorage.clear();
+  window.location = '/login'
+})
 //Eventlistener btnSignUp
 
 // EVENTLISTENER btnAddChannel
 btnAddChannel.addEventListener("click", async () => {
   const channelFromUser = inputChannel.value;
   const newChannel = {
-    isLocked: false,
+    isLocked: isLockedCheckbox.checked,
     name: channelFromUser,
   };
   const element = await fetchChannel(newChannel);
@@ -65,7 +56,7 @@ btnAddChannel.addEventListener("click", async () => {
 // FUNCTION CREATE NEW CHANNEL
 async function fetchChannel(newChannel) {
   console.log('fetchChannel newChannel=', newChannel)
-  const response = await fetch("/api/channels", {
+  const response = await _fetch("/api/channels", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -93,16 +84,24 @@ function createChannelElement(channel) {
   console.log('createChannelElement channel= ', channel)
   elemDiv.className = "channel";
   if (channel.isLocked) {
-    elemDiv.className = "channel isLocked";
+    elemDiv.classList.add("isLocked");
   }
+  elemDiv.addEventListener('click', () => {
+    selectedChannel = channel
+    document.querySelector('.channel.selected')?.classList.remove('selected')
+    elemDiv.classList.add('selected')
+    selectedChannelTitle.innerHTML = channel.name
+    updateSelectedChannel()
+  })
   return elemDiv;
 }
 
 // FUNCTION loadChannels
 async function loadChannels(channelsContainer) {
-  const response = await fetch("/api/channels");
+  const response = await _fetch("/api/channels");
   const data = await response.json();
   data.forEach((channel) => {
+    console.log('channel', channel)
     let elemDiv = createChannelElement(channel);
     channelsContainer.appendChild(elemDiv);
   });
@@ -111,21 +110,23 @@ async function loadChannels(channelsContainer) {
 
 loadChannels(channelsContainer);
 
+
 function updateLoginStatus() {
-  btnSignIn.disabled = isLoggedIn;
-  btnSignUp.disabled = isLoggedIn;
+  let jwt = localStorage.getItem(JWT_KEY);
+  if (!jwt && !isLoggedIn) window.location = '/login'
 }
 
 // RIGHT COLUMN
 // EVENTLISTENER btnSendMessage
-btnSendMessage.addEventListener("click", async () => {
+btnSendMessage.addEventListener("click", async (e) => {
+
   const userInputMessage = inputMessage.value;
   const newMessage = {
-    isLocked: false,
-    name: userInputMessage,
+    text: userInputMessage,
+    channelId: selectedChannel.id
   };
-  const element = await fetchMessage(newMessage);
-  messagesContainer.appendChild(element);
+  await fetchMessage(newMessage);
+  updateSelectedChannel()
 });
 
 // EVENTLISTENER Keyup + disabled btnSendMessage
@@ -139,11 +140,11 @@ inputMessage.addEventListener("keyup", (event) => {
 });
 
 // EVENTLISTENER InputMessage
-inputMessage.addEventListener("click", (event) => {});
+inputMessage.addEventListener("click", (event) => { });
 
 // FUNCTION CREATE NEW MESSAGE
 async function fetchMessage(newMessage) {
-  const response = await fetch("/api/messages", {
+  const response = await _fetch("/api/messages", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -158,7 +159,26 @@ async function fetchMessage(newMessage) {
 // FUNCTION createMessageElement
 function createMessageElement(message) {
   let messageElemDiv = document.createElement("div");
-  messageElemDiv.innerText = message.name;
+  let metadataDiv = document.createElement("div")
+
+  let timeDiv = document.createElement("div")
+  timeDiv.className = "metadata"
+  timeDiv.innerText = message.formattedDate
+
+  let userDiv = document.createElement("div")
+  userDiv.className = "user"
+  userDiv.innerText = message.username
+
+  metadataDiv.appendChild(userDiv)
+  metadataDiv.appendChild(timeDiv)
+
+  let textDiv = document.createElement("div")
+  textDiv.className = "text"
+  textDiv.innerText = message.text
+
+  messageElemDiv.appendChild(metadataDiv)
+  messageElemDiv.appendChild(textDiv)
+
   messageElemDiv.className = "message";
   if (message.isLocked) {
     messageElemDiv.className = "message isLocked";
@@ -169,8 +189,11 @@ function createMessageElement(message) {
 // FUNCTION loadMessages
 // Datum och tid på meddelande
 async function loadMessages(messagesContainer) {
-  const response = await fetch("/api/messages");
+  if (!selectedChannel) return
+
+  const response = await _fetch(`/api/messages/${selectedChannel.id}`);
   const data = await response.json();
+  messagesContainer.innerHTML = ""
   data.forEach((message) => {
     let messageElemDiv = createMessageElement(message);
     messagesContainer.appendChild(messageElemDiv);
@@ -178,7 +201,6 @@ async function loadMessages(messagesContainer) {
   console.log("message: ", data);
 }
 
-loadMessages(messagesContainer);
 
 // FUNCTIONS localStorage
 function getFromLocalStorage() {
@@ -200,6 +222,28 @@ function saveToLocalStorage(items) {
   localStorage.setItem(key, json);
 }
 
-// Används med localStorage (samma för backend?)
-const JWT_KEY = "bookapi-jwt";
-let isLoggedIn = false;
+const updateSelectedChannel = () => {
+  if (!selectedChannel) {
+    inputMessage.value = 'Please select a channel'
+    inputMessage.disabled = true
+    btnSendMessage.disabled = true
+  } else {
+    if (!selectedChannel.access) {
+      selectedChannelTitle.classList.add('locked')
+      inputMessage.value = 'This channel is locked for you'
+      inputMessage.disabled = true
+      btnSendMessage.disabled = true
+    } else {
+      selectedChannelTitle.classList.remove('locked')
+      inputMessage.value = ''
+      inputMessage.disabled = false
+      btnSendMessage.disabled = false
+    }
+  }
+  loadMessages(messagesContainer)
+
+}
+
+
+updateLoginStatus()
+updateSelectedChannel()
