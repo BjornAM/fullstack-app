@@ -59,7 +59,7 @@ function createToken(name) {
 // GET /secret
 
 app.listen(PORT, () => {
-	console.log('Server is listening on port' + PORT)
+	console.log('Server is listening on http://localhost:' + PORT)
 })
 
 
