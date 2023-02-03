@@ -14,6 +14,14 @@
       "channelId": "8aJqArZkD",
       "time": "2023-02-03T21:19:55.666Z",
       "formattedDate": "2023-02-03 22:19:55"
+    },
+    {
+      "username": "BjörnMånsson",
+      "id": "viq6ZMCXS",
+      "text": "Spara bara progression",
+      "channelId": "FderBAGrQ",
+      "time": "2023-02-03T21:31:03.086Z",
+      "formattedDate": "2023-02-03 22:31:03"
     }
   ],
   "channels": [
@@ -31,6 +39,12 @@
       "isLocked": true,
       "name": "Benchpress",
       "id": "8aJqArZkD",
+      "createdBy": "BjörnMånsson"
+    },
+    {
+      "isLocked": true,
+      "name": "Statistik AI",
+      "id": "FderBAGrQ",
       "createdBy": "BjörnMånsson"
     }
   ],

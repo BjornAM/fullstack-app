@@ -45,9 +45,8 @@ btnAddChannel.addEventListener("click", async () => {
     isLocked: isLockedCheckbox.checked,
     name: channelFromUser,
   };
-  const element = await fetchChannel(newChannel);
-  channelsContainer.appendChild(element);
-
+  await fetchChannel(newChannel);
+  loadChannels(channelsContainer)
   //data.push(newChannel)
   //saveToLocalStorage(data)
   //spara till backend
@@ -100,6 +99,7 @@ function createChannelElement(channel) {
 async function loadChannels(channelsContainer) {
   const response = await _fetch("/api/channels");
   const data = await response.json();
+  channelsContainer.innerHTML = ""
   data.forEach((channel) => {
     console.log('channel', channel)
     let elemDiv = createChannelElement(channel);
